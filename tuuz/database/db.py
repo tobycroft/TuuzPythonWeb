@@ -2,7 +2,7 @@ import configparser
 
 import config.db
 
-
+db = dataset.connect('mysql://user:password@localhost/mydatabase')
 def init():
     cfg = configparser.ConfigParser()
     cfg.read("conf.ini")
