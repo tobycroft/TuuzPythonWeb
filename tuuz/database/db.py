@@ -1,9 +1,13 @@
 import configparser
 
+import dataset
+
 import config.db
 
 # write a code which can connect to database
-db = dataset.connect('mysql://user:password@localhost/mydatabase')
+db = dataset.connect('mysql://' + config.db.dbuser + ':' + config.db.dbpass + '@' + config.db.dbhost + '/' + config.db.dbname)
+
+
 def init():
     cfg = configparser.ConfigParser()
     cfg.read("conf.ini")
