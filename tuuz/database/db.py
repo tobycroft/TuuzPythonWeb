@@ -2,6 +2,7 @@ import configparser
 
 import config.db
 
+# write a code which can connect to database
 db = dataset.connect('mysql://user:password@localhost/mydatabase')
 def init():
     cfg = configparser.ConfigParser()

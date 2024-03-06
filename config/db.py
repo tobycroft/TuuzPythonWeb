@@ -5,4 +5,3 @@ dbuser = ""
 dbpass = ""
 dbhost = ""
 dbport = ""
-Database = None
