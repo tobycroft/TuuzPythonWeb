@@ -10,7 +10,7 @@ json_ascii_content_type = ["application/json"]
 
 
 def json_response(data):
-    body = json.dumps(data)
+    body = json.dumps(data, indent=4, sort_keys=True, default=str)
     response = Response(body, content_type="application/json")
     return response
 
