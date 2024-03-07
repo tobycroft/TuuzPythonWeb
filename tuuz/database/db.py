@@ -4,8 +4,7 @@ import dataset
 
 import config.db
 
-# write a code which can connect to database
-db = dataset.connect('mysql://' + config.db.dbuser + ':' + config.db.dbpass + '@' + config.db.dbhost + '/' + config.db.dbname)
+db = dataset.connect()
 
 
 def init():
