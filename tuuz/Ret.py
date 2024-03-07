@@ -1,16 +1,38 @@
 import json
 from typing import Any, Dict, Tuple
 
+import flask
+from flask import Response, make_response
+
 import config.app
 import config.secure
-import tuuz.Ret.response
+import config.secure
+
+json_content_type = ["application/json; charset=utf-8"]
+jsonp_content_type = ["application/javascript; charset=utf-8"]
+json_ascii_content_type = ["application/json"]
+
+
+def json_response(data):
+    body = json.dumps(data, indent=4, sort_keys=True, default=str)
+    response = Response(body, content_type="application/json")
+    return response
+
+
+def secure_json_response(data):
+    body = json.dumps(data)
+    if isinstance(data, list) and len(data) > 0:
+        body = config.secure.SECURE_JSON_PREFIX + body
+
+    response = Response(body, content_type="application/json")
+    return response
 
 
 def json_encode(data: Any) -> str:
     return json.dumps(data)
 
 
-def success(code: int, data: Any = None, echo: Any = None) -> None:
+def success(code: int, data: Any = None, echo: Any = None):
     if echo is None:
         echo_map = {
             0: "成功",
@@ -33,13 +55,13 @@ def success(code: int, data: Any = None, echo: Any = None) -> None:
 
     ret_code, ret_json = ret_succ(code, data, echo)
     if config.secure.SECURE_JSON:
-        return tuuz.Ret.response.secure_json_response(ret_json)
+        flask.abort(make_response(secure_json_response(ret_json)))
     else:
-        return tuuz.Ret.response.json_response(ret_json)
+        flask.abort(make_response(json_response(ret_json)))
 
 
-def fail(code: int, data: Any = None, echo: Any = None) -> None:
-    return success(code, data, echo)
+def fail(code: int, data: Any = None, echo: Any = None):
+    success(code, data, echo)
 
 
 def ret_succ(code: int, data: Any = None, echo: Any = None) -> Tuple[int, Dict[str, Any]]:
