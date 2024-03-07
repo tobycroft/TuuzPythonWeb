@@ -2,7 +2,7 @@ import configparser
 
 import dataset
 
-import config.db
+import config
 
 
 def db():

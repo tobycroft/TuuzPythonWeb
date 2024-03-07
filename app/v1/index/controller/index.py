@@ -1,6 +1,6 @@
-import os
-
 from flask import Blueprint
+
+import tuuz.Ret.ret
 
 Index = Blueprint('index', __name__)
 
@@ -8,4 +8,4 @@ Index = Blueprint('index', __name__)
 @Index.route('/')
 @Index.route('/index')
 def index():
-    return 'Index'
+    return tuuz.Ret.ret.fail(400, None)
