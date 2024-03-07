@@ -4,7 +4,17 @@ import dataset
 
 import config.db
 
-db = dataset.connect()
+
+def db():
+    return dataset.connect(
+        "mysql://{dbuser}:{dbpass}@{dbhost}:{dbport}/{dbname}".format(
+            dbuser=config.db.dbuser,
+            dbpass=config.db.dbpass,
+            dbhost=config.db.dbhost,
+            dbport=config.db.dbport,
+            dbname=config.db.dbname
+        )
+    )
 
 
 def init():
