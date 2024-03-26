@@ -5,10 +5,12 @@ import config.db
 import tuuz.Redis.pyredis
 import tuuz.database.db
 from router.router import MainRoute
+from tuuz.Calc import Token
 
 run(config.app.init())
 run(tuuz.database.db.init())
 run(tuuz.Redis.pyredis.init())
+run(Token.refresh_base_num())
 
 app = MainRoute()
 
