@@ -9,7 +9,7 @@ AppMode = "debug"
 WebsocketKey = ""
 
 
-def init():
+async def init():
     global Project, Debug, TestMode, AppMode, WebsocketKey
     if not os.path.exists("conf.ini"):
         cfg = configparser.ConfigParser()
